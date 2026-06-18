@@ -34,7 +34,7 @@
 
   // CALIDAD DE VIDA
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
 
   // SHELL INTEGRATION
   "terminal.integrated.shellIntegration.enabled": true,
@@ -43,7 +43,7 @@
   "terminal.integrated.inheritEnv": true,
 
   // LINKS
-  "terminal.integrated.enableFileLinks": true,
+  "terminal.integrated.enableFileLinks": "on",
 
   // PERSISTENCIA
   "terminal.integrated.enablePersistentSessions": true,
@@ -69,5 +69,6 @@
   // UI
   "workbench.list.smoothScrolling": true,
   "breadcrumbs.enabled": false,
-  "editor.accessibilitySupport": "off"
+  "editor.accessibilitySupport": "off",
+  "todo-tree.ripgrep": "/opt/homebrew/bin/rg"
 }
