@@ -2,6 +2,10 @@
 
 set -e
 
+# Make scripts executable
+chmod +x ~/dotfiles/bootstrap.sh
+chmod +x ~/dotfiles/update.sh
+
 echo "🚀 Starting dotfiles setup..."
 
 # Helper function
