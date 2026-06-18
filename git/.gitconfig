@@ -1,0 +1,15 @@
+[user]
+  name = mmundog
+  email = 282106427+mmundog@users.noreply.github.com
+
+[core]
+  editor = code --wait
+
+[init]
+  defaultBranch = main
+
+[push]
+  autoSetupRemote = true
+
+[color]
+  ui = auto
