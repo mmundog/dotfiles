@@ -4,7 +4,6 @@ export LC_ALL=en_US.UTF-8
 
 # Prompt
 autoload -U colors && colors
-PROMPT='%F{39}%1~%f %F{46}❯%f '
 
 # History
 HISTSIZE=10000
