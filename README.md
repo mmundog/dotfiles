@@ -79,7 +79,7 @@ git push
 | Tipo    | Cuándo usarlo                       |
 |---------|-------------------------------------|
 | `feat`  | Algo nuevo que no existía           |
-| `fix`    | Corrección de algo roto             |
+| `fix`   | Corrección de algo roto             |
 | `chore` | Mantenimiento sin impacto funcional |
 | `docs`  | Solo documentación                  |
 
