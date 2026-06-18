@@ -71,9 +71,40 @@ Cuando cambies paquetes, extensiones o configuraciones:
 brew bundle dump --force   # si cambiaste algo en Homebrew o extensiones de VS Code
 ~/dotfiles/update.sh
 git add .
-git commit -m "Update"
+git commit -m "tipo: descripción breve"
 git push
 ```
+
+### Tipos de commit
+| Tipo | Cuándo usarlo |
+|------|--------------|
+| `feat` | Algo nuevo que no existía |
+| `fix` | Corrección de algo roto |
+| `chore` | Mantenimiento sin impacto funcional |
+| `docs` | Solo documentación |
+
+Ejemplos:
+- `chore: add ripgrep to Brewfile`
+- `fix: correct settings.json type errors`
+- `docs: document manual vs automatic update workflow`
+
+Esta convención se llama **Conventional Commits** y permite navegar el historial de un vistazo sin necesidad de abrir cada commit.
+
+### Ejemplo de commit por archivo
+```bash
+git add Brewfile
+git commit -m "chore: add ripgrep to Brewfile"
+
+git add vscode/settings.json
+git commit -m "fix: correct settings.json type errors"
+
+git add README.md
+git commit -m "docs: document manual vs automatic update workflow"
+
+git push
+```
+
+Commitear por archivo en lugar de `git add .` permite revertir cambios puntuales sin afectar el resto.
 
 ## Estructura
 dotfiles/
