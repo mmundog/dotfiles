@@ -3,7 +3,8 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Prompt
-PROMPT='%1~ ❯ '
+autoload -U colors && colors
+PROMPT='%F{39}%1~%f %F{46}❯%f '
 
 # History
 HISTSIZE=10000
@@ -17,8 +18,23 @@ autoload -Uz compinit
 compinit
 
 # Aliases
-alias ll="ls -lah"
 alias gs="git status"
 alias ..="cd .."
-alias cls="clear"
 alias dotfiles="cd ~/dotfiles"
+alias reload="source ~/.zshrc"
+alias ll="eza -lah --icons"
+
+# Extra
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats ' %F{214}%b%f'
+zstyle ':vcs_info:*' check-for-changes true
+
+precmd() {
+  vcs_info
+}
+
+setopt PROMPT_SUBST
+
+PROMPT='%F{39}%1~%f${vcs_info_msg_0_} %F{250}❯%f '
