@@ -4,6 +4,18 @@ set -e
 
 echo "🚀 Starting dotfiles setup..."
 
+# Helper function
+link() {
+  local src=$1
+  local dst=$2
+  if [ -L "$dst" ]; then
+    echo "  ✓ Already linked: $dst"
+  else
+    ln -sf "$src" "$dst"
+    echo "  → Linked: $dst"
+  fi
+}
+
 # Install Homebrew if missing
 if ! command -v brew >/dev/null 2>&1; then
   echo "🍺 Installing Homebrew..."
@@ -14,15 +26,15 @@ echo "📦 Installing packages..."
 brew bundle --file=~/dotfiles/Brewfile
 
 echo "⚙️ Applying zsh config..."
-ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/zsh/.zprofile ~/.zprofile
+link ~/dotfiles/zsh/.zshrc ~/.zshrc
+link ~/dotfiles/zsh/.zprofile ~/.zprofile
 
 echo "🔧 Applying Git config..."
-ln -sf ~/dotfiles/git/.gitconfig ~/.gitconfig
+link ~/dotfiles/git/.gitconfig ~/.gitconfig
 
 echo "💻 Setting VS Code config..."
 mkdir -p ~/Library/Application\ Support/Code/User
-ln -sf ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+link ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
 echo "🔌 Installing VS Code extensions..."
 if command -v code >/dev/null 2>&1; then
