@@ -1,0 +1,73 @@
+{
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+  // PERFIL
+  "terminal.integrated.defaultProfile.osx": "zsh",
+
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": ["-l"]
+    }
+  },
+
+  // FUENTE
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontWeight": "500",
+  "terminal.integrated.lineHeight": 1.2,
+  "terminal.integrated.letterSpacing": 0.3,
+
+  // CURSOR
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "editor.cursorBlinking": "smooth",
+
+  // RENDIMIENTO
+  "terminal.integrated.gpuAcceleration": "auto",
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.fastScrollSensitivity": 5,
+
+  // HISTORIAL
+  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.tabs.hideCondition": "singleTerminal",
+
+  // CALIDAD DE VIDA
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+
+  // SHELL INTEGRATION
+  "terminal.integrated.shellIntegration.enabled": true,
+
+  // ENTORNO
+  "terminal.integrated.inheritEnv": true,
+
+  // LINKS
+  "terminal.integrated.enableFileLinks": true,
+
+  // PERSISTENCIA
+  "terminal.integrated.enablePersistentSessions": true,
+
+  // MENOS RUIDO
+  "terminal.integrated.stickyScroll.enabled": false,
+
+  // RENDER
+  "terminal.integrated.minimumContrastRatio": 1,
+
+  // EDITOR
+  "editor.minimap.enabled": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "JetBrains Mono",
+
+  // ARCHIVOS
+  "files.autoSave": "afterDelay",
+  "files.trimTrailingWhitespace": true,
+
+  // UI
+  "workbench.list.smoothScrolling": true,
+  "breadcrumbs.enabled": false,
+  "editor.accessibilitySupport": "off"
+}
