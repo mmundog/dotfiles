@@ -76,12 +76,12 @@ git push
 ```
 
 ### Tipos de commit
-| Tipo | Cuándo usarlo |
-|------|--------------|
-| `feat` | Algo nuevo que no existía |
-| `fix` | Corrección de algo roto |
+| Tipo    | Cuándo usarlo                       |
+|---------|-------------------------------------|
+| `feat`  | Algo nuevo que no existía           |
+| `fix`    | Corrección de algo roto             |
 | `chore` | Mantenimiento sin impacto funcional |
-| `docs` | Solo documentación |
+| `docs`  | Solo documentación                  |
 
 Ejemplos:
 - `chore: add ripgrep to Brewfile`
