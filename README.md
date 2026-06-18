@@ -1,35 +1,57 @@
-Dotfiles
+# Dotfiles
 
 Configuración personal para macOS (Apple Silicon).
 
-Incluye
-Homebrew
-VS Code
-Configuración de zsh
-Fuentes
-Extensiones de VS Code
-Restaurar entorno
-Instalar Homebrew
+## Incluye
 
-Seguir las instrucciones oficiales de Homebrew.
+- Homebrew + paquetes (Brewfile)
+- Configuración de zsh (.zshrc, .zprofile)
+- Configuración de Git (.gitconfig)
+- Extensiones y settings de VS Code
+- Fuentes (JetBrains Mono Nerd Font)
 
-Clonar repositorio
-git clone <url-del-repositorio>
-Entrar al repositorio
-cd dotfiles
-Instalar paquetes
-brew bundle
-Restaurar configuraciones
-zsh/.zshrc → ~/.zshrc
-zsh/.zprofile → ~/.zprofile
-vscode/settings.json → Configuración de usuario de VS Code
-Estructura
+## Restaurar entorno en una Mac nueva
+
+1. Instalar Homebrew:
+```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Clonar repositorio:
+```bash
+   git clone https://github.com/mmundog/dotfiles.git ~/dotfiles
+```
+
+3. Correr bootstrap:
+```bash
+   ~/dotfiles/bootstrap.sh
+```
+
+Eso es todo — el script instala paquetes, crea symlinks y configura VS Code automáticamente.
+
+## Estructura
 dotfiles/
+
+├── bootstrap.sh
+
 ├── Brewfile
+
+├── git/
+
+│   └── .gitconfig
+
 ├── vscode/
+
+│   ├── settings.json
+
+│   └── extensions.txt
+
 └── zsh/
-Hardware actual
-Mac Mini M4
-Apple Silicon
-zsh
-VS Code
+
+├── .zshrc
+
+└── .zprofile
+
+## Hardware
+
+- Mac Mini M4 (Apple Silicon)
