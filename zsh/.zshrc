@@ -19,9 +19,9 @@ compinit
 # Aliases
 alias gs="git status"
 alias ..="cd .."
-alias dotfiles="cd ~/dotfiles"
 alias reload="source ~/.zshrc"
 alias ll="eza -lah --icons"
+alias doctor="bash ~/dotfiles/doctor.sh"
 
 # Extra
 autoload -Uz vcs_info
