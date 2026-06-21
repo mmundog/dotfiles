@@ -70,5 +70,5 @@
   "workbench.list.smoothScrolling": true,
   "breadcrumbs.enabled": false,
   "editor.accessibilitySupport": "off",
-  "todo-tree.ripgrep": "/opt/homebrew/bin/rg"
+  "todo-tree.ripgrep.ripgrep": "/opt/homebrew/bin/rg"
 }
