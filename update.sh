@@ -7,10 +7,12 @@ echo "🔄 Updating dotfiles..."
 echo "📦 Updating Homebrew packages..."
 brew update
 brew upgrade
-brew bundle --file=~/dotfiles/Brewfile
 
-echo "🔌 Updating VS Code extensions list..."
-code --list-extensions > ~/dotfiles/vscode/extensions.txt
+echo "📝 Syncing Brewfile with installed packages and extensions..."
+brew bundle dump --file=~/dotfiles/Brewfile --force
+
+echo "🩺 Running verification..."
+bash ~/dotfiles/doctor.sh
 
 echo "✅ Done. Don't forget to commit the changes:"
-echo "   git add . && git commit -m 'Update packages and extensions' && git push"
+echo "   git add . && git commit -m 'chore: update packages and extensions' && git push"
