@@ -4,6 +4,7 @@
 
 [core]
   editor = code --wait
+	excludesfile = /Users/mundog/.gitignore_global
 
 [init]
   defaultBranch = main
