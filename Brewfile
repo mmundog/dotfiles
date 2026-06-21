@@ -13,6 +13,7 @@ brew "ripgrep"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 cask "font-jetbrains-mono-nerd-font"
+cask "visual-studio-code"
 vscode "christian-kohler.path-intellisense"
 vscode "dbaeumer.vscode-eslint"
 vscode "donjayamanne.python-environment-manager"
