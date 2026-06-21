@@ -35,14 +35,13 @@ link ~/dotfiles/zsh/.zprofile ~/.zprofile
 
 echo "🔧 Applying Git config..."
 link ~/dotfiles/git/.gitconfig ~/.gitconfig
+link ~/dotfiles/git/.gitignore_global ~/.gitignore_global
 
 echo "💻 Setting VS Code config..."
 mkdir -p ~/Library/Application\ Support/Code/User
 link ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 
-echo "🔌 Installing VS Code extensions..."
-if command -v code >/dev/null 2>&1; then
-  cat ~/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
-fi
+echo "🩺 Running verification..."
+bash ~/dotfiles/doctor.sh
 
 echo "✅ Done."
