@@ -142,31 +142,21 @@ git push
 Commitear por archivo en lugar de `git add .` permite revertir cambios puntuales sin afectar el resto.
 
 ## Estructura
+```
 dotfiles/
-
 ├── bootstrap.sh
-
 ├── update.sh
-
 ├── doctor.sh
-
 ├── Brewfile
-
 ├── git/
-
 │   ├── .gitconfig
-
 │   └── .gitignore_global
-
 ├── vscode/
-
 │   └── settings.json
-
 └── zsh/
-
-├── .zshrc
-
-└── .zprofile
+    ├── .zshrc
+    └── .zprofile
+```
 
 ## Hardware
 - Mac Mini M4 (Apple Silicon)
