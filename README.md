@@ -143,17 +143,29 @@ Commitear por archivo en lugar de `git add .` permite revertir cambios puntuales
 
 ## Estructura
 dotfiles/
+
 ├── bootstrap.sh
+
 ├── update.sh
+
 ├── doctor.sh
+
 ├── Brewfile
+
 ├── git/
+
 │   ├── .gitconfig
+
 │   └── .gitignore_global
+
 ├── vscode/
+
 │   └── settings.json
+
 └── zsh/
+
 ├── .zshrc
+
 └── .zprofile
 
 ## Hardware
