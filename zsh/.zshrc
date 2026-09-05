@@ -24,8 +24,12 @@ alias ll="eza -lah --icons"
 alias doctor="bash ~/dotfiles/doctor.sh"
 
 # Extra
-autoload -Uz vcs_info
 
+# Node.js (fnm)
+
+eval "$(fnm env --use-on-cd)"
+
+autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git:*' formats ' %F{214}%b%f'
 zstyle ':vcs_info:*' check-for-changes true
