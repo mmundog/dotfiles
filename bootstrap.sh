@@ -2,6 +2,11 @@
 
 set -e
 
+# Detect operating system
+source ~/dotfiles/scripts/platform.sh
+
+echo "🖥️ Platform: $DOTFILES_OS"
+
 # Make scripts executable
 chmod +x ~/dotfiles/bootstrap.sh
 chmod +x ~/dotfiles/update.sh
