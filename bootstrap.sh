@@ -34,6 +34,20 @@ if [[ "$DOTFILES_OS" == "macos" ]]; then
 
   echo "📦 Installing packages with Homebrew..."
   brew bundle --file=~/dotfiles/Brewfile
+
+elif [[ "$DOTFILES_OS" == "linux" ]]; then
+  case "$DOTFILES_DISTRO" in
+    ubuntu|debian)
+      bash ~/dotfiles/packages/debian.sh
+      ;;
+    fedora)
+      bash ~/dotfiles/packages/fedora.sh
+      ;;
+    *)
+      echo "⚠️ Unsupported Linux distribution: $DOTFILES_DISTRO"
+      exit 1
+      ;;
+  esac
 fi
 
 echo "⚙️ Applying zsh config..."
