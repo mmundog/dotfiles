@@ -25,14 +25,16 @@ link() {
   fi
 }
 
-# Install Homebrew if missing
-if ! command -v brew >/dev/null 2>&1; then
-  echo "🍺 Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# Install platform-specific packages
+if [[ "$DOTFILES_OS" == "macos" ]]; then
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "🍺 Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
-echo "📦 Installing packages..."
-brew bundle --file=~/dotfiles/Brewfile
+  echo "📦 Installing packages with Homebrew..."
+  brew bundle --file=~/dotfiles/Brewfile
+fi
 
 echo "⚙️ Applying zsh config..."
 link ~/dotfiles/zsh/.zshrc ~/.zshrc
@@ -43,8 +45,14 @@ link ~/dotfiles/git/.gitconfig ~/.gitconfig
 link ~/dotfiles/git/.gitignore_global ~/.gitignore_global
 
 echo "💻 Setting VS Code config..."
-mkdir -p ~/Library/Application\ Support/Code/User
-link ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+
+if [[ "$DOTFILES_OS" == "macos" ]]; then
+  mkdir -p ~/Library/Application\ Support/Code/User
+  link ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+elif [[ "$DOTFILES_OS" == "linux" ]]; then
+  mkdir -p ~/.config/Code/User
+  link ~/dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
+fi
 
 echo "🩺 Running verification..."
 bash ~/dotfiles/doctor.sh
