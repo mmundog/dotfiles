@@ -54,6 +54,17 @@ elif [[ "$DOTFILES_OS" == "linux" ]]; then
   link ~/dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
 fi
 
+echo "🔌 Installing VS Code extensions..."
+
+if command -v code >/dev/null 2>&1; then
+  while IFS= read -r extension; do
+    [ -z "$extension" ] && continue
+    code --install-extension "$extension" --force
+  done < ~/dotfiles/vscode/extensions
+else
+  echo "⚠️ VS Code is not available, skipping extensions."
+fi
+
 echo "🩺 Running verification..."
 bash ~/dotfiles/doctor.sh
 

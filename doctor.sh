@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
-# Verifica que TODO lo que el repositorio instala/configura esté presente
+
+# Verify that everything installed/configured by the repository is present
 
 # Detect operating system
 source ~/dotfiles/scripts/platform.sh
@@ -27,42 +28,45 @@ check() {
 # ─── HOMEBREW CORE ───
 if [[ "$DOTFILES_OS" == "macos" ]]; then
   echo "🍺 Homebrew"
-  check "brew está instalado" "command -v brew"
-  check "brew está en el PATH" "which brew"
+  check "brew is installed" "command -v brew"
+  check "brew is in PATH" "which brew"
 fi
 
 # ─── GIT / GITHUB ───
 echo ""
 echo "🔧 Git"
-check "git está instalado" "command -v git"
-check "gh (GitHub CLI) está instalado" "command -v gh"
-check "gh está autenticado" "gh auth status"
+check "git is installed" "command -v git"
+check "gh (GitHub CLI) is installed" "command -v gh"
+check "gh is authenticated" "gh auth status"
 
 # ─── SYMLINKS ───
 echo ""
 echo "🔗 Symlinks"
-check ".zshrc está enlazado" "[ -L ~/.zshrc ]"
-check ".zprofile está enlazado" "[ -L ~/.zprofile ]"
-check ".gitconfig está enlazado" "[ -L ~/.gitconfig ]"
-check ".gitignore_global está enlazado" "[ -L ~/.gitignore_global ]"
+check ".zshrc is linked" "[ -L ~/.zshrc ]"
+check ".zprofile is linked" "[ -L ~/.zprofile ]"
+check ".gitconfig is linked" "[ -L ~/.gitconfig ]"
+check ".gitignore_global is linked" "[ -L ~/.gitignore_global ]"
+
 if [[ "$DOTFILES_OS" == "macos" ]]; then
-  check "VS Code settings.json está enlazado" "[ -L ~/Library/Application\ Support/Code/User/settings.json ]"
+  check "VS Code settings.json is linked" "[ -L ~/Library/Application\ Support/Code/User/settings.json ]"
 elif [[ "$DOTFILES_OS" == "linux" ]]; then
-  check "VS Code settings.json está enlazado" "[ -L ~/.config/Code/User/settings.json ]"
+  check "VS Code settings.json is linked" "[ -L ~/.config/Code/User/settings.json ]"
 fi
 
-# ─── PAQUETES BREW (formulae) ───
+# ─── BREW FORMULAE ───
 if [[ "$DOTFILES_OS" == "macos" ]]; then
   echo ""
-  echo "📦 Paquetes Homebrew (formulae)"
+  echo "📦 Homebrew formulae"
+
   brew_formulae=$(grep '^brew ' ~/dotfiles/Brewfile | sed -E 's/brew "(.*)"/\1/')
+
   while IFS= read -r formula; do
     [ -z "$formula" ] && continue
 
     if brew list --formula | grep -Eq "^${formula}(@[0-9]+(\.[0-9]+)*)?$"; then
-      echo "  $PASS $formula instalado"
+      echo "  $PASS $formula installed"
     else
-      echo "  $FAIL $formula instalado"
+      echo "  $FAIL $formula installed"
       doctor_status=1
     fi
   done <<< "$brew_formulae"
@@ -72,39 +76,43 @@ fi
 if [[ "$DOTFILES_OS" == "macos" ]]; then
   echo ""
   echo "🖥️ Apps (casks)"
+
   brew_casks=$(grep '^cask ' ~/dotfiles/Brewfile | sed -E 's/cask "(.*)"/\1/')
+
   while IFS= read -r cask; do
     [ -z "$cask" ] && continue
-    check "$cask instalado" "brew list --cask | grep -qx '$cask'"
+    check "$cask installed" "brew list --cask | grep -qx '$cask'"
   done <<< "$brew_casks"
 fi
 
-# ─── EXTENSIONES VS CODE ───
+# ─── VSCODE EXTENSIONS ───
 echo ""
-echo "🔌 Extensiones de VS Code"
+echo "🔌 VS Code extensions"
+
 if command -v code >/dev/null 2>&1; then
   installed_extensions=$(code --list-extensions)
-  vscode_extensions=$(grep '^vscode ' ~/dotfiles/Brewfile | sed -E 's/vscode "(.*)"/\1/')
-  while IFS= read -r ext; do
-    [ -z "$ext" ] && continue
-    if echo "$installed_extensions" | grep -qix "$ext"; then
-      echo "  $PASS $ext"
+
+  while IFS= read -r extension; do
+    [ -z "$extension" ] && continue
+
+    if echo "$installed_extensions" | grep -qix "$extension"; then
+      echo "  $PASS $extension"
     else
-      echo "  $FAIL $ext"
+      echo "  $FAIL $extension"
       doctor_status=1
     fi
-  done <<< "$vscode_extensions"
+  done < ~/dotfiles/vscode/extensions
 else
-  echo "  $FAIL code no está disponible, no se pueden verificar extensiones"
+  echo "  $FAIL code is not available, cannot verify extensions"
   doctor_status=1
 fi
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 echo ""
 if [ $doctor_status -eq 0 ]; then
-  echo "✅ Todo en orden."
+  echo "✅ Everything is in order."
 else
-  echo "⚠️  Hay elementos que requieren atención (ver ❌ arriba)."
+  echo "⚠️  Some items require attention (see ❌ above)."
 fi
 
 exit $doctor_status
