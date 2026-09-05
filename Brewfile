@@ -1,3 +1,7 @@
+# Fast and simple Node.js version manager
+
+brew "fnm"
+
 # Modern, maintained replacement for ls
 brew "eza"
 
@@ -6,9 +10,6 @@ brew "gh"
 
 # Distributed revision control system
 brew "git"
-
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 
 # Interpreted, interactive, object-oriented programming language
 brew "python"

@@ -6,7 +6,7 @@ echo ""
 
 PASS="✅"
 FAIL="❌"
-status=0
+doctor_status=0
 
 check() {
   local label=$1
@@ -15,7 +15,7 @@ check() {
     echo "  $PASS $label"
   else
     echo "  $FAIL $label"
-    status=1
+    doctor_status=1
   fi
 }
 
@@ -46,7 +46,13 @@ echo "📦 Paquetes Homebrew (formulae)"
 brew_formulae=$(grep '^brew ' ~/dotfiles/Brewfile | sed -E 's/brew "(.*)"/\1/')
 while IFS= read -r formula; do
   [ -z "$formula" ] && continue
-  check "$formula instalado" "brew list --formula | grep -qx '$formula'"
+
+  if brew list --formula | grep -Eq "^${formula}(@[0-9]+(\.[0-9]+)*)?$"; then
+    echo "  $PASS $formula instalado"
+  else
+    echo "  $FAIL $formula instalado"
+    doctor_status=1
+  fi
 done <<< "$brew_formulae"
 
 # ─── CASKS ───
@@ -75,15 +81,15 @@ if command -v code >/dev/null 2>&1; then
   done <<< "$vscode_extensions"
 else
   echo "  $FAIL code no está disponible, no se pueden verificar extensiones"
-  status=1
+  doctor_status=1
 fi
 
 # ─── RESUMEN ───
 echo ""
-if [ $status -eq 0 ]; then
+if [ $doctor_status -eq 0 ]; then
   echo "✅ Todo en orden."
 else
   echo "⚠️  Hay elementos que requieren atención (ver ❌ arriba)."
 fi
 
-exit $status
+exit $doctor_status
