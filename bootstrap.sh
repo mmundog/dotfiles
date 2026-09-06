@@ -55,6 +55,11 @@ if [[ "$DOTFILES_OS" == "linux" ]]; then
   bash ~/dotfiles/scripts/install-fnm.sh
 fi
 
+# Install Visual Studio Code on Linux
+if [[ "$DOTFILES_OS" == "linux" ]]; then
+  bash ~/dotfiles/scripts/install-vscode.sh
+fi
+
 echo "⚙️ Applying zsh config..."
 link ~/dotfiles/zsh/.zshrc ~/.zshrc
 link ~/dotfiles/zsh/.zprofile ~/.zprofile
