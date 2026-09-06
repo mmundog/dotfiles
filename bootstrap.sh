@@ -60,6 +60,19 @@ if [[ "$DOTFILES_OS" == "linux" ]]; then
   bash ~/dotfiles/scripts/install-vscode.sh
 fi
 
+# Set zsh as the default shell on Linux
+if [[ "$DOTFILES_OS" == "linux" ]]; then
+  current_shell=$(getent passwd "$USER" | cut -d: -f7)
+  zsh_path=$(command -v zsh)
+
+  if [[ "$current_shell" != "$zsh_path" ]]; then
+    echo "🐚 Setting zsh as the default shell..."
+    chsh -s "$zsh_path"
+  else
+    echo "✓ zsh is already the default shell"
+  fi
+fi
+
 echo "⚙️ Applying zsh config..."
 link ~/dotfiles/zsh/.zshrc ~/.zshrc
 link ~/dotfiles/zsh/.zprofile ~/.zprofile
