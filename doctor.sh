@@ -49,6 +49,25 @@ elif [[ "$DOTFILES_OS" == "linux" ]]; then
   check "fnm is installed" "[ -x \"$HOME/.local/share/fnm/fnm\" ]"
 fi
 
+# ─── SHELL ───
+echo ""
+echo "🐚 Shell"
+
+check "zsh is installed" "command -v zsh"
+
+if [[ "$DOTFILES_OS" == "macos" ]]; then
+  default_shell=$(dscl . -read /Users/"$USER" UserShell | awk '{print $2}')
+else
+  default_shell=$(getent passwd "$USER" | cut -d: -f7)
+fi
+
+if [[ "$default_shell" == "$(command -v zsh)" ]]; then
+  echo "  $PASS zsh is the default shell"
+else
+  echo "  $FAIL zsh is not the default shell"
+  doctor_status=1
+fi
+
 # ─── SYMLINKS ───
 echo ""
 echo "🔗 Symlinks"
