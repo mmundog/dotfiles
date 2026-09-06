@@ -21,7 +21,14 @@ alias gs="git status"
 alias ..="cd .."
 alias reload="source ~/.zshrc"
 alias ll="eza -lah --icons"
-alias doctor="bash ~/dotfiles/doctor.sh"
+
+unalias doctor 2>/dev/null
+
+doctor() {
+  local dotfiles_dir
+  dotfiles_dir="$(cd -- "$(dirname -- "$(readlink "$HOME/.zshrc")")/.." && pwd)"
+  bash "$dotfiles_dir/doctor.sh"
+}
 
 # Extra
 
