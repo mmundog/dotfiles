@@ -2,14 +2,16 @@
 
 set -e
 
+DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
 # Detect operating system
-source ~/dotfiles/scripts/platform.sh
+source "$DOTFILES_DIR/scripts/platform.sh"
 
 echo "🖥️ Platform: $DOTFILES_OS"
 
 # Make scripts executable
-chmod +x ~/dotfiles/bootstrap.sh
-chmod +x ~/dotfiles/update.sh
+chmod +x "$DOTFILES_DIR/bootstrap.sh"
+chmod +x "$DOTFILES_DIR/update.sh"
 
 echo "🚀 Starting dotfiles setup..."
 
@@ -41,15 +43,15 @@ if [[ "$DOTFILES_OS" == "macos" ]]; then
   fi
 
   echo "📦 Installing packages with Homebrew..."
-  brew bundle --file=~/dotfiles/Brewfile
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 elif [[ "$DOTFILES_OS" == "linux" ]]; then
   case "$DOTFILES_DISTRO" in
     ubuntu|debian)
-      bash ~/dotfiles/packages/debian.sh
+      bash "$DOTFILES_DIR/packages/debian.sh"
       ;;
     fedora)
-      bash ~/dotfiles/packages/fedora.sh
+      bash "$DOTFILES_DIR/packages/fedora.sh"
       ;;
     *)
       echo "⚠️ Unsupported Linux distribution: $DOTFILES_DISTRO"
@@ -60,12 +62,12 @@ fi
 
 # Install fnm on Linux
 if [[ "$DOTFILES_OS" == "linux" ]]; then
-  bash ~/dotfiles/scripts/install-fnm.sh
+  bash "$DOTFILES_DIR/scripts/install-fnm.sh"
 fi
 
 # Install Visual Studio Code on Linux
 if [[ "$DOTFILES_OS" == "linux" ]]; then
-  bash ~/dotfiles/scripts/install-vscode.sh
+  bash "$DOTFILES_DIR/scripts/install-vscode.sh"
 fi
 
 # Set zsh as the default shell on Linux
@@ -82,21 +84,20 @@ if [[ "$DOTFILES_OS" == "linux" ]]; then
 fi
 
 echo "⚙️ Applying zsh config..."
-link ~/dotfiles/zsh/.zshrc ~/.zshrc
-link ~/dotfiles/zsh/.zprofile ~/.zprofile
+link "$DOTFILES_DIR/zsh/.zshrc" ~/.zshrc
+link "$DOTFILES_DIR/zsh/.zprofile" ~/.zprofile
 
 echo "🔧 Applying Git config..."
-link ~/dotfiles/git/.gitconfig ~/.gitconfig
-link ~/dotfiles/git/.gitignore_global ~/.gitignore_global
+link "$DOTFILES_DIR/git/.gitconfig" ~/.gitconfig
+link "$DOTFILES_DIR/git/.gitignore_global" ~/.gitignore_global
 
 echo "💻 Setting VS Code config..."
-
 if [[ "$DOTFILES_OS" == "macos" ]]; then
   mkdir -p ~/Library/Application\ Support/Code/User
-  link ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+  link "$DOTFILES_DIR/vscode/settings.json" ~/Library/Application\ Support/Code/User/settings.json
 elif [[ "$DOTFILES_OS" == "linux" ]]; then
   mkdir -p ~/.config/Code/User
-  link ~/dotfiles/vscode/settings.json ~/.config/Code/User/settings.json
+  link "$DOTFILES_DIR/vscode/settings.json" ~/.config/Code/User/settings.json
 fi
 
 echo "🔌 Installing VS Code extensions..."
@@ -105,12 +106,12 @@ if command -v code >/dev/null 2>&1; then
   while IFS= read -r extension; do
     [ -z "$extension" ] && continue
     code --install-extension "$extension" --force
-  done < ~/dotfiles/vscode/extensions
+  done < "$DOTFILES_DIR/vscode/extensions"
 else
   echo "⚠️ VS Code is not available, skipping extensions."
 fi
 
 echo "🩺 Running verification..."
-bash ~/dotfiles/doctor.sh
+bash "$DOTFILES_DIR/doctor.sh"
 
 echo "✅ Done."
