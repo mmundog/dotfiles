@@ -39,6 +39,16 @@ check "git is installed" "command -v git"
 check "gh (GitHub CLI) is installed" "command -v gh"
 check "gh is authenticated" "gh auth status"
 
+# ─── NODE.JS / FNM ───
+echo ""
+echo "🟢 Node.js"
+
+if [[ "$DOTFILES_OS" == "macos" ]]; then
+  check "fnm is installed" "command -v fnm"
+elif [[ "$DOTFILES_OS" == "linux" ]]; then
+  check "fnm is installed" "[ -x \"$HOME/.local/share/fnm/fnm\" ]"
+fi
+
 # ─── SYMLINKS ───
 echo ""
 echo "🔗 Symlinks"
