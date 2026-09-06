@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # Verify that everything installed/configured by the repository is present
+DOTFILES_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 # Detect operating system
-source ~/dotfiles/scripts/platform.sh
+source "$DOTFILES_DIR/scripts/platform.sh"
 
 echo "🖥️ Platform: $DOTFILES_OS"
 
@@ -87,7 +88,7 @@ if [[ "$DOTFILES_OS" == "macos" ]]; then
   echo ""
   echo "📦 Homebrew formulae"
 
-  brew_formulae=$(grep '^brew ' ~/dotfiles/Brewfile | sed -E 's/brew "(.*)"/\1/')
+  brew_formulae=$(grep '^brew ' "$DOTFILES_DIR/Brewfile" | sed -E 's/brew "(.*)"/\1/')
 
   while IFS= read -r formula; do
     [ -z "$formula" ] && continue
@@ -106,7 +107,7 @@ if [[ "$DOTFILES_OS" == "macos" ]]; then
   echo ""
   echo "🖥️ Apps (casks)"
 
-  brew_casks=$(grep '^cask ' ~/dotfiles/Brewfile | sed -E 's/cask "(.*)"/\1/')
+  brew_casks=$(grep '^cask ' "$DOTFILES_DIR/Brewfile" | sed -E 's/cask "(.*)"/\1/')
 
   while IFS= read -r cask; do
     [ -z "$cask" ] && continue
@@ -130,7 +131,7 @@ if command -v code >/dev/null 2>&1; then
       echo "  $FAIL $extension"
       doctor_status=1
     fi
-  done < ~/dotfiles/vscode/extensions
+  done < "$DOTFILES_DIR/vscode/extensions"
 else
   echo "  $FAIL code is not available, cannot verify extensions"
   doctor_status=1
