@@ -26,8 +26,13 @@ alias doctor="bash ~/dotfiles/doctor.sh"
 # Extra
 
 # Node.js (fnm)
+if [[ -x "$HOME/.local/share/fnm/fnm" ]]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
+fi
 
-eval "$(fnm env --use-on-cd)"
+if command -v fnm >/dev/null 2>&1; then
+  eval "$(fnm env --use-on-cd)"
+fi
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git

@@ -50,6 +50,11 @@ elif [[ "$DOTFILES_OS" == "linux" ]]; then
   esac
 fi
 
+# Install fnm on Linux
+if [[ "$DOTFILES_OS" == "linux" ]]; then
+  bash ~/dotfiles/scripts/install-fnm.sh
+fi
+
 echo "⚙️ Applying zsh config..."
 link ~/dotfiles/zsh/.zshrc ~/.zshrc
 link ~/dotfiles/zsh/.zprofile ~/.zprofile

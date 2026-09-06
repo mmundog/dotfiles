@@ -10,4 +10,7 @@ sudo dnf install -y \
   ripgrep \
   tree \
   curl \
-  zsh
+  unzip \
+  zsh \
+  gh \
+  eza
