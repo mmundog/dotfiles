@@ -17,10 +17,18 @@ echo "🚀 Starting dotfiles setup..."
 link() {
   local src=$1
   local dst=$2
-  if [ -L "$dst" ]; then
-    echo "  ✓ Already linked: $dst"
+
+  if [[ -L "$dst" ]]; then
+    if [[ "$(readlink "$dst")" == "$src" ]]; then
+      echo "  ✓ Already linked: $dst"
+    else
+      echo "  ↻ Updating link: $dst"
+      ln -sf "$src" "$dst"
+    fi
+  elif [[ -e "$dst" ]]; then
+    echo "  ⚠️ Existing file, skipping: $dst"
   else
-    ln -sf "$src" "$dst"
+    ln -s "$src" "$dst"
     echo "  → Linked: $dst"
   fi
 }
